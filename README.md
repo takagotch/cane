@@ -36,6 +36,28 @@ rescue LoadError
   warn "cane not available, quality task not provided."
 end
 
+# unhappy.rb
+class UnhappyCheck < Struct.new(:opts)
+  def self.options
+    {
+      unhappy_file: ["File to check", default: [nil]]
+    }
+  end
+  def violations
+    [
+      description: "Files are unhappy",
+      file: opts.fetch(:unhappy_file),
+      label: ":("
+    ]
+  end
+end
+
+
+require 'unhappy'
+Cane::RakeTask.new(:quality) do |c|
+  c.use UnhappyCheck, unhappy_file: 'myfile'
+end
+
 ```
 
 ```
