@@ -14,6 +14,10 @@ cat .cane
 
 cane
 
+echo "89" > coverage/.last_run.json
+cane --gte 'coverage/.last_json,90'
+
+cane -r unhappy.rb --check UnhappyCheck --unhappy-file myfile
 
 ```
 
